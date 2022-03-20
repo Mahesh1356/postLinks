@@ -1,3 +1,6 @@
+
+# Simple Blog(Links)
+ A simple blog app, to experiment ```linked list``` concept.
  ## Step 1
  - Open a terminal and run command ```cd ~/Documents ```
  - Clone this repo by running command ```git clone git@github.com:Mahesh1356/postLinks.git```
