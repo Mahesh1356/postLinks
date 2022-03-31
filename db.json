@@ -1,3 +1,25 @@
 {
-    "posts": []
+  "posts": [
+    {
+      "previous": null,
+      "id": "uYLbiX087_",
+      "title": "title uYLbiX087_",
+      "author": "author uYLbiX087_",
+      "next": "1OuepmajAd"
+    },
+    {
+      "previous": "uYLbiX087_",
+      "id": "1OuepmajAd",
+      "title": "title 1OuepmajAd",
+      "author": "author 1OuepmajAd",
+      "next": "wzP5CpAuZG"
+    },
+    {
+      "previous": "1OuepmajAd",
+      "id": "wzP5CpAuZG",
+      "title": "title wzP5CpAuZG",
+      "author": "author wzP5CpAuZG",
+      "next": null
+    }
+  ]
 }

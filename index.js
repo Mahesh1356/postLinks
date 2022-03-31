@@ -26,7 +26,7 @@ postLinkApp.post("/posts", async (req, res) => {
     const newId = getNewId()
     let prevId = null
     if (totPost > 0) {
-        prevId = posts[totPost - 1].id
+        posts.map(item => { if (item.next == null) prevId = item.id })
     }
     if (prevId !== null) {
         await axios.patch(`http://localhost:3000/posts/${prevId}`, { next: newId })
@@ -50,6 +50,30 @@ postLinkApp.delete("/posts/:id", async (req, res) => {
         await axios.patch(`http://localhost:3000/posts/${post.next}`, { previous: post.previous })
     await axios.delete(`http://localhost:3000/posts/${req.params.id}`)
     res.send("deleted")
+})
+//insert front
+postLinkApp.post("/posts/:id", async (req, res) => {
+    const { data: currentPost } = await axios.get(
+        `http://localhost:3000/posts/${req.params.id}`
+    );
+    const { data: nextPost } = await axios.get(
+        `http://localhost:3000/posts/${currentPost.nextPostId}`
+    );
+    const newId = nanoid(10);
+    const newPost = {
+        "previous": currentPost.id,
+        "title": "title " + newId,
+        "author": "author " + newId,
+        "next": nextPost.id,
+    };
+    await axios.post("http://localhost:3000/posts", newPost);
+    await axios.patch(`http://localhost:3000/posts/${currentPost.id}`, {
+        nextPostId: newPost.id,
+    });
+    await axios.patch(`http://localhost:3000/posts/${nextPost.id}`, {
+        previousPostId: newPost.id,
+    });
+    res.send("inserted");
 })
 
 postLinkApp.listen(3001, console.log("app is running in http://localhost:3001"))
