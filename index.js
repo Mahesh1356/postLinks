@@ -51,14 +51,11 @@ postLinkApp.delete("/posts/:id", async (req, res) => {
     await axios.delete(`http://localhost:3000/posts/${req.params.id}`)
     res.send("deleted")
 })
-//insert front
+
+//insert back
 postLinkApp.post("/posts/:id", async (req, res) => {
-    const { data: currentPost } = await axios.get(
-        `http://localhost:3000/posts/${req.params.id}`
-    );
-    const { data: nextPost } = await axios.get(
-        `http://localhost:3000/posts/${currentPost.nextPostId}`
-    );
+    const { data: currentPost } = await axios.get(`http://localhost:3000/posts/${req.params.id}`);
+    const { data: nextPost } = await axios.get(`http://localhost:3000/posts/${currentPost.next}`);
     const newId = nanoid(10);
     const newPost = {
         "previous": currentPost.id,
@@ -67,12 +64,8 @@ postLinkApp.post("/posts/:id", async (req, res) => {
         "next": nextPost.id,
     };
     await axios.post("http://localhost:3000/posts", newPost);
-    await axios.patch(`http://localhost:3000/posts/${currentPost.id}`, {
-        nextPostId: newPost.id,
-    });
-    await axios.patch(`http://localhost:3000/posts/${nextPost.id}`, {
-        previousPostId: newPost.id,
-    });
+    await axios.patch(`http://localhost:3000/posts/${currentPost.id}`, { next: newPost.id, });
+    await axios.patch(`http://localhost:3000/posts/${nextPost.id}`, { previous: newPost.id, });
     res.send("inserted");
 })
 
