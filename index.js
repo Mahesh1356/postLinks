@@ -1,9 +1,11 @@
 const axios = require('axios');
+const cors = require('cors');
 const { nanoid } = require('nanoid');
 const express = require("express")
 const postLinkApp = express()
 
 postLinkApp.use(express.json())
+postLinkApp.use(cors({ origin: "*", credentials: true }))
 
 const getNewId = () => {
     return nanoid(10)
@@ -51,22 +53,24 @@ postLinkApp.delete("/posts/:id", async (req, res) => {
     await axios.delete(`http://localhost:3000/posts/${req.params.id}`)
     res.send("deleted")
 })
-
+//sample
 //insert back
 postLinkApp.post("/posts/:id", async (req, res) => {
     const { data: currentPost } = await axios.get(`http://localhost:3000/posts/${req.params.id}`);
-    const { data: nextPost } = await axios.get(`http://localhost:3000/posts/${currentPost.next}`);
     const newId = nanoid(10);
+    const next = currentPost.next === null ? null : currentPost.next;
+
     const newPost = {
         "previous": currentPost.id,
+        "id": newId,
         "title": "title " + newId,
         "author": "author " + newId,
-        "next": nextPost.id,
+        "next": next,
     };
     await axios.post("http://localhost:3000/posts", newPost);
     await axios.patch(`http://localhost:3000/posts/${currentPost.id}`, { next: newPost.id, });
-    await axios.patch(`http://localhost:3000/posts/${nextPost.id}`, { previous: newPost.id, });
+    currentPost.next !== null && await axios.patch(`http://localhost:3000/posts/${next.id}`, { previous: newPost.id, });
     res.send("inserted");
 })
 
-postLinkApp.listen(3001, console.log("app is running in http://localhost:3001"))
+postLinkApp.listen(3002, console.log("app is running in http://localhost:3002"))

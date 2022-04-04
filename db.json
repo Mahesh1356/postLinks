@@ -2,38 +2,24 @@
   "posts": [
     {
       "previous": null,
-      "id": "uYLbiX087_",
-      "title": "title uYLbiX087_",
-      "author": "author uYLbiX087_",
-      "next": "1OuepmajAd"
+      "id": "TCjUaxYnYz",
+      "title": "title TCjUaxYnYz",
+      "author": "author TCjUaxYnYz",
+      "next": "TOCIIFTDX1"
     },
     {
-      "previous": "uYLbiX087_",
-      "id": "1OuepmajAd",
-      "title": "title 1OuepmajAd",
-      "author": "author 1OuepmajAd",
-      "next": "wzP5CpAuZG"
+      "previous": "TCjUaxYnYz",
+      "id": "TOCIIFTDX1",
+      "title": "title TOCIIFTDX1",
+      "author": "author TOCIIFTDX1",
+      "next": "aI17ihFsvQ"
     },
     {
-      "previous": "1OuepmajAd",
-      "id": "wzP5CpAuZG",
-      "title": "title wzP5CpAuZG",
-      "author": "author wzP5CpAuZG",
+      "previous": "TOCIIFTDX1",
+      "id": "aI17ihFsvQ",
+      "title": "title aI17ihFsvQ",
+      "author": "author aI17ihFsvQ",
       "next": null
-    },
-    {
-      "previous": "1OuepmajAd",
-      "title": "title OLGk53GpCw",
-      "author": "author OLGk53GpCw",
-      "next": "wzP5CpAuZG",
-      "id": "uKuBDBJ"
-    },
-    {
-      "previous": "1OuepmajAd",
-      "title": "title QP9L94Htps",
-      "author": "author QP9L94Htps",
-      "next": "wzP5CpAuZG",
-      "id": "ux-C6AZ"
     }
   ]
 }
